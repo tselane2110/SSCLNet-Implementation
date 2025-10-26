@@ -6,14 +6,13 @@ from PIL import Image
 class FolderDeduplicator:
     def __init__(self, main_folder):
         self.main_folder = main_folder
-        self.all_images = {}  # hash -> file_path
+        self.all_images = {}
         self.duplicates = []
     
     def find_all_images(self):
-        """Find all image files across j and k subfolders"""
+        """PROPERLY count all image files"""
         print("Scanning for all images...")
         
-        # Expected structure: i/j/*/ and i/k/*/
         j_folder = os.path.join(self.main_folder, 'j')
         k_folder = os.path.join(self.main_folder, 'k')
         
@@ -24,30 +23,29 @@ class FolderDeduplicator:
             for subfolder in os.listdir(j_folder):
                 subfolder_path = os.path.join(j_folder, subfolder)
                 if os.path.isdir(subfolder_path):
-                    image_count += self._scan_folder(subfolder_path)
+                    image_count += self._count_images_in_folder(subfolder_path)
         
         # Scan k subfolders  
         if os.path.exists(k_folder):
             for subfolder in os.listdir(k_folder):
                 subfolder_path = os.path.join(k_folder, subfolder)
                 if os.path.isdir(subfolder_path):
-                    image_count += self._scan_folder(subfolder_path)
+                    image_count += self._count_images_in_folder(subfolder_path)
         
         print(f"Found {image_count} total images across all subfolders")
         return image_count
     
-    def _scan_folder(self, folder_path):
-        """Scan a single folder for images"""
+    def _count_images_in_folder(self, folder_path):
+        """Count images in a single folder"""
         count = 0
         for file in os.listdir(folder_path):
             if self.is_image_file(file):
-                file_path = os.path.join(folder_path, file)
                 count += 1
         return count
     
     def is_image_file(self, filename):
         """Check if file is an image"""
-        return filename.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp', '.tiff', '.webp'))
+        return filename.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp', '.tiff', '.webp', '.gif'))
     
     def find_duplicates(self):
         """Find exact duplicates using MD5 hashing"""
@@ -134,9 +132,10 @@ class FolderDeduplicator:
         print(f"Duplicate images found: {len(duplicates)}")
         
         if duplicates:
-            response = input(f"\nDelete {len(duplicates)} duplicates? (y/n): ")
-            if response.lower() == 'y':
+            response = input(f"\nDelete {len(duplicates)} duplicates? (y/n): ").strip().lower()
+            if response == 'y':
                 self.remove_duplicates(backup=backup)
+                print("Deduplication completed!")
             else:
                 print("Duplicates identified but not removed.")
         else:
@@ -144,10 +143,49 @@ class FolderDeduplicator:
         
         return duplicates
 
-# Usage
+# Let's first debug your folder structure
+def debug_folder_structure(main_folder):
+    """Debug function to check your folder structure"""
+    print("=== DEBUGGING FOLDER STRUCTURE ===")
+    print(f"Main folder exists: {os.path.exists(main_folder)}")
+    
+    if os.path.exists(main_folder):
+        j_folder = os.path.join(main_folder, 'j')
+        k_folder = os.path.join(main_folder, 'k')
+        
+        print(f"j folder exists: {os.path.exists(j_folder)}")
+        print(f"k folder exists: {os.path.exists(k_folder)}")
+        
+        if os.path.exists(j_folder):
+            j_subfolders = [f for f in os.listdir(j_folder) if os.path.isdir(os.path.join(j_folder, f))]
+            print(f"j subfolders: {j_subfolders}")
+            for sub in j_subfolders:
+                sub_path = os.path.join(j_folder, sub)
+                files = os.listdir(sub_path)
+                image_files = [f for f in files if f.lower().endswith(('.png', '.jpg', '.jpeg'))]
+                print(f"  {sub}: {len(image_files)} images")
+        
+        if os.path.exists(k_folder):
+            k_subfolders = [f for f in os.listdir(k_folder) if os.path.isdir(os.path.join(k_folder, f))]
+            print(f"k subfolders: {k_subfolders}")
+            for sub in k_subfolders:
+                sub_path = os.path.join(k_folder, sub)
+                files = os.listdir(sub_path)
+                image_files = [f for f in files if f.lower().endswith(('.png', '.jpg', '.jpeg'))]
+                print(f"  {sub}: {len(image_files)} images")
+
+# Usage in Colab:
 if __name__ == "__main__":
     # Set your main folder path here
-    main_folder = "i"  # or full path like "/path/to/i"
+    main_folder = "/content/i"  # Change this to your actual path
     
+    # First, debug the folder structure
+    debug_folder_structure(main_folder)
+    
+    print("\n" + "="*50)
+    print("STARTING DEDUPLICATION")
+    print("="*50)
+    
+    # Then run deduplication
     deduplicator = FolderDeduplicator(main_folder)
     duplicates = deduplicator.run_deduplication(backup=True)
