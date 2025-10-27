@@ -15,7 +15,7 @@ TEMPERATURE = 0.1
 SUPERVISED_EPOCHS = 50
 SUPERVISED_LR = 0.0001
 
-# Paths (adjust for Colab)
+# Paths (adjust according to your directory structure)
 PRETRAIN_DATA_PATH = '/content/data/pretrain/'
 TRAIN_DATA_PATH = '/content/data/train/'
 VAL_DATA_PATH = '/content/data/val/'
