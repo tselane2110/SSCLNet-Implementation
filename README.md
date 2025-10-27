@@ -16,6 +16,9 @@ Access the paper from [here](https://doi.org/10.1109/ACCESS.2023.3237542).
 2. Merged the two `4 Class Datasets` and added a fifth class of `Glioblastoma Multiforme` tumor, making the resultant dataset to be a `5-class` dataset.
 3. Deduplicated the complete dataset (including 2-class data and 5-class data) using MD5 Hashing. Work is shown in the `dataset-preparation.ipynb` file.
 
+</br>
+The following two steps were performed using the `dataset.py` module.
+
 ### Data Splitting Strategy
 * **Pretrain**: 70% of the complete dataset was randomly sampled from both 2-class and 5-class folders, then placed in a flat directory structure without labels for self-supervised contrastive learning.
 * **Train**: 20% of the complete dataset was randomly selected from the remaining 30% unseen data, maintaining the original hierarchical folder structure with proper class labels for supervised fine-tuning.
