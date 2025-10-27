@@ -15,6 +15,7 @@ class ProjectionHead(nn.Module):
             nn.ReLU(inplace=True),
             nn.Linear(256, 256),
             nn.ReLU(inplace=True),
+            nn.Dropout(0.4),  
             nn.Linear(256, output_dim)
         )
         
@@ -28,7 +29,7 @@ class ClassificationHead(nn.Module):
         self.classifier = nn.Sequential(
             nn.Linear(input_dim, 256),
             nn.ReLU(inplace=True),
-            nn.Linear(256, 256),
+            nn.Linear(256, 256), 
             nn.ReLU(inplace=True),
             nn.Linear(256, 128),
             nn.ReLU(inplace=True),
@@ -40,8 +41,7 @@ class ClassificationHead(nn.Module):
             nn.ReLU(inplace=True),
             nn.Linear(32, 16),
             nn.ReLU(inplace=True),
-            nn.Dropout(0.4),
-            nn.Linear(16, num_classes)
+            nn.Linear(16, num_classes)  # SoftMax handled by CrossEntropyLoss
         )
         
     def forward(self, x):
