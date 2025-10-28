@@ -37,16 +37,20 @@ class ExperimentLogger:
             self.writer.add_scalar(key, value, epoch)
             self.logger.info(f'Epoch {epoch} - {key}: {value:.4f}')
     
-    def log_config(self, config):
+    def log_config(self, config):    
         """Log experiment configuration"""
-        config_dict = {k: v for k, v in vars(config).items() if not k.startswith('_')}
-        self.logger.info("Experiment Configuration:")
-        for key, value in config_dict.items():
-            self.logger.info(f"  {key}: {value}")
-        
-        # Save config to file
-        with open(f'logs/{self.experiment_name}_config.json', 'w') as f:
-            json.dump(config_dict, f, indent=2)
+        # Extract only simple, JSON-serializable config values
+        config_dict = {}
+        for key in dir(config):
+            if not key.startswith('_') and not callable(getattr(config, key)):
+                try:
+                    value = getattr(config, key)
+                    # Test if it's JSON serializable
+                    json.dumps(value)
+                    config_dict[key] = value
+                except (TypeError, AttributeError):
+                    # Skip non-serializable objects (modules, functions, etc.)
+                    continue
 
 def setup_directories():
     """Create all necessary directories for the project"""
