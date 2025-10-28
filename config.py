@@ -24,4 +24,7 @@ VAL_DATA_PATH = '/content/data/val/'
 CONTRASTIVE_SAVE_PATH = '/content/models/contrastive_pretrained.pth'
 SUPERVISED_SAVE_PATH = '/content/models/supervised_final.pth'
 
+# Random seed for reproducibility
+SEED = 42
+
 SAVE_FREQ = 20
