@@ -295,6 +295,20 @@ def save_results_to_json(results, experiment_name):
     
     print(f"✓ Results saved to: {filename}")
 
+def plot_contrastive_loss(losses, filename='contrastive_loss.png'):
+    """Plot contrastive pre-training loss"""
+    plt.figure(figsize=(10, 6))
+    plt.plot(losses, label='Contrastive Loss', color='red', linewidth=2)
+    plt.xlabel('Epoch')
+    plt.ylabel('Loss')
+    plt.title('Contrastive Pre-training Loss')
+    plt.legend()
+    plt.grid(True, alpha=0.3)
+    plt.tight_layout()
+    plt.savefig(f'plots/{filename}', dpi=300, bbox_inches='tight')
+    plt.close()
+    print(f"Contrastive loss plot saved: plots/{filename}")
+
 # Initialize when imported
 setup_directories()
 
