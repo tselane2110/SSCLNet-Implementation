@@ -5,6 +5,7 @@ DEVICE = 'cuda' if torch.cuda.is_available() else 'cpu'
 RESNET_TYPE = 50
 NUM_CLASSES = 5
 BATCH_SIZE = 64  # Smaller for Colab CPU
+NUM_WORKERS = 4 # Number of parallel data loading workers
 
 # Contrastive training
 CONTRASTIVE_EPOCHS = 100
