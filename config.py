@@ -3,8 +3,8 @@ import torch
 
 DEVICE = 'cuda' if torch.cuda.is_available() else 'cpu'
 RESNET_TYPE = 50
-NUM_CLASSES = 4
-BATCH_SIZE = 32  # Smaller for Colab CPU
+NUM_CLASSES = 5
+BATCH_SIZE = 64  # Smaller for Colab CPU
 
 # Contrastive training
 CONTRASTIVE_EPOCHS = 100
@@ -12,7 +12,7 @@ CONTRASTIVE_LR = 0.0003
 TEMPERATURE = 0.1
 
 # Supervised training  
-SUPERVISED_EPOCHS = 50
+SUPERVISED_EPOCHS = 100
 SUPERVISED_LR = 0.0001
 
 # Paths (adjust according to your directory structure)
