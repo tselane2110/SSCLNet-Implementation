@@ -16,8 +16,10 @@ SUPERVISED_EPOCHS = 100
 SUPERVISED_LR = 0.0001
 
 # Paths (adjust according to your directory structure)
-PRETRAIN_DATA_PATH = '/content/data/pretrain/'
-TRAIN_DATA_PATH = '/content/data/train/'
+PRETRAIN_DATA_PATH = '/content/Preprocessed-splitted-data/pretrain'
+TRAIN_DATA_PATH = '/content/Preprocessed-splitted-data/train/5-class'
+# PRETRAIN_DATA_PATH = '/content/data/pretrain/'
+# TRAIN_DATA_PATH = '/content/data/train/'
 VAL_DATA_PATH = '/content/data/val/'
 CONTRASTIVE_SAVE_PATH = '/content/models/contrastive_pretrained.pth'
 SUPERVISED_SAVE_PATH = '/content/models/supervised_final.pth'
