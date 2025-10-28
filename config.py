@@ -17,7 +17,7 @@ SUPERVISED_EPOCHS = 100
 SUPERVISED_LR = 0.0001
 
 # Paths (adjust according to your directory structure)
-PRETRAIN_DATA_PATH = '/content/Preprocessed-splitted-data/pretrain'
+PRETRAIN_DATA_PATH = '/content/Preprocessed-splitted-data/'
 TRAIN_DATA_PATH = '/content/Preprocessed-splitted-data/train/5-class'
 # PRETRAIN_DATA_PATH = '/content/data/pretrain/'
 # TRAIN_DATA_PATH = '/content/data/train/'
