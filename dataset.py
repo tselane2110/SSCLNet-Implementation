@@ -426,6 +426,7 @@ def apply_two_different_augmentations(image):
     # Convert both to tensor and ensure 224x224 size
     base_transforms = transforms.Compose([
         transforms.Resize((224, 224)),
+        transforms.Grayscale(num_output_channels=1),  
         transforms.ToTensor(),  # Converts to [0, 1] range
     ])
     
