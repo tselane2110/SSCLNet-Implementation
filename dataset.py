@@ -233,7 +233,6 @@ def apply_median_filter(image, kernel_size=3):
     return filtered
 
 def preprocess_single_image(image_path):
-    """Apply complete preprocessing pipeline to a single image"""
     try:
         image = cv2.imread(image_path)
         if image is None:
@@ -254,7 +253,9 @@ def preprocess_single_image(image_path):
         # Resize to 224x224
         resized = cv2.resize(filtered, (224, 224), interpolation=cv2.INTER_AREA)
         
-        return resized
+        # Convert back to 3-channel for compatibility
+        final_image = cv2.cvtColor(resized, cv2.COLOR_GRAY2BGR)  # ← ADD THIS LINE
+        return final_image  # ← Now returns [224, 224, 3]
         
     except Exception as e:
         print(f"Error processing {image_path}: {str(e)}")
