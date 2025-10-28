@@ -478,6 +478,7 @@ def get_dataloaders(data_path, loader_type, batch_size=64, num_workers=4):
     # Additional transforms for train (data augmentation)
     train_transforms = transforms.Compose([
         transforms.Resize((224, 224)),
+        transforms.Grayscale(num_output_channels=1),
         transforms.ToTensor(),
     ])
     
