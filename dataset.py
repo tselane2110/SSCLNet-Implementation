@@ -254,10 +254,7 @@ def preprocess_single_image(image_path):
         # Resize to 224x224
         resized = cv2.resize(filtered, (224, 224), interpolation=cv2.INTER_AREA)
         
-        # Convert back to 3-channel for compatibility
-        final_image = cv2.cvtColor(resized, cv2.COLOR_GRAY2BGR)
-        
-        return final_image
+        return resized
         
     except Exception as e:
         print(f"Error processing {image_path}: {str(e)}")
@@ -383,10 +380,21 @@ def preprocess_split_data(input_path, output_path):
 
 def add_random_noise(image):
     """Add random Gaussian noise to image"""
-    img_array = np.array(image)
-    noise = np.random.normal(0, 25, img_array.shape).astype(np.uint8)
-    noisy_array = np.clip(img_array + noise, 0, 255)
-    return Image.fromarray(noisy_array.astype(np.uint8))
+    # Convert to numpy array if needed
+    if isinstance(image, Image.Image):
+        img_array = np.array(image)
+    else:
+        img_array = image
+    
+    # Add Gaussian noise with smaller std for medical images
+    noise = np.random.normal(0, 10, img_array.shape).astype(np.float32)  
+    noisy_array = np.clip(img_array.astype(np.float32) + noise, 0, 255)
+    
+    # Convert back to PIL Image
+    if isinstance(image, Image.Image):
+        return Image.fromarray(noisy_array.astype(np.uint8))
+    else:
+        return noisy_array.astype(np.uint8)
 
 def apply_two_different_augmentations(image):
     """Apply TWO DIFFERENT random augmentations from the pool to create a pair"""
@@ -463,7 +471,8 @@ def get_dataloaders(data_path, loader_type, batch_size=64, num_workers=4):
     # Base transforms (normalize to [0, 1] range)
     base_transforms = transforms.Compose([
         transforms.Resize((224, 224)),
-        transforms.ToTensor(),  # This automatically converts to [0, 1] range
+        transforms.Grayscale(num_output_channels=1),  # Ensures 1 channel
+        transforms.ToTensor(),  # This automatically converts to [0, 1] range like [1, 224, 224]
     ])
     
     # Additional transforms for train (data augmentation)
