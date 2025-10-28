@@ -54,15 +54,15 @@ class SSCLNet(nn.Module):
         
         # σ(·) - Encoder (LFG Block)
         if resnet_type == 18:
-            self.encoder = models.resnet18(pretrained=False)
+            self.encoder = models.resnet18(weights=None)
             self.encoder.conv1 = nn.Conv2d(1, 64, kernel_size=7, stride=2, padding=3, bias=False)  # 1 channel for MRI
             self.feature_dim = 512
         elif resnet_type == 34:
-            self.encoder = models.resnet34(pretrained=False)
+            self.encoder = models.resnet34(weights=None)
             self.encoder.conv1 = nn.Conv2d(1, 64, kernel_size=7, stride=2, padding=3, bias=False)
             self.feature_dim = 512
         else:  # resnet50
-            self.encoder = models.resnet50(pretrained=False)
+            self.encoder = models.resnet50(weights=None)
             self.encoder.conv1 = nn.Conv2d(1, 64, kernel_size=7, stride=2, padding=3, bias=False)
             self.feature_dim = 2048
         
