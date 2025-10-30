@@ -18,10 +18,10 @@ SUPERVISED_LR = 0.0001
 
 # Paths (adjust according to your directory structure)
 PRETRAIN_DATA_PATH = '/content/Preprocessed-splitted-data/'
-TRAIN_DATA_PATH = '/content/Preprocessed-splitted-data/train/5-class'
+TRAIN_DATA_PATH = '/content/Preprocessed-splitted-data/'
 # PRETRAIN_DATA_PATH = '/content/data/pretrain/'
 # TRAIN_DATA_PATH = '/content/data/train/'
-VAL_DATA_PATH = '/content/data/val/'
+# VAL_DATA_PATH = '/content/data/val/' # since the paper implementation does not use any validation set
 CONTRASTIVE_SAVE_PATH = '/content/contrastive_training/models/contrastive_pretrained.pth'
 SUPERVISED_SAVE_PATH = '/content/supervised_training/models/supervised_final.pth'
 
