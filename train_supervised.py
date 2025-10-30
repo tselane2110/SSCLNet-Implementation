@@ -176,6 +176,10 @@ def train_supervised():
         # Save best model based on TRAIN accuracy
         if train_acc > best_train_acc:
             best_train_acc = train_acc
+
+            # Create directory if it doesn't exist
+            os.makedirs(os.path.dirname(config.SUPERVISED_SAVE_PATH), exist_ok=True)
+            torch.save(model.state_dict(), config.SUPERVISED_SAVE_PATH)
             
             # Save complete model (encoder + classifier)
             torch.save(model.state_dict(), config.SUPERVISED_SAVE_PATH)
