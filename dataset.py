@@ -492,13 +492,13 @@ def get_dataloaders(data_path, loader_type, batch_size=64, num_workers=4):
         
     elif loader_type == 'train':
         # Supervised training - returns (images, labels)
-        train_dir = os.path.join(data_path, 'train')
+        train_dir = data_path
         dataset = datasets.ImageFolder(train_dir, transform=train_transforms)
         shuffle = True
         
     elif loader_type == 'test':
         # Testing - returns (images, labels)  
-        test_dir = os.path.join(data_path, 'test')
+        test_dir = data_path
         dataset = datasets.ImageFolder(test_dir, transform=base_transforms)
         shuffle = False
         
