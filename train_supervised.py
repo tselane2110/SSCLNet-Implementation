@@ -189,7 +189,6 @@ def train_supervised():
 
             # Create directory if it doesn't exist
             os.makedirs(os.path.dirname(config.SUPERVISED_SAVE_PATH), exist_ok=True)
-            torch.save(model.state_dict(), config.SUPERVISED_SAVE_PATH)
             
             # Save complete model (encoder + classifier)
             torch.save(model.state_dict(), config.SUPERVISED_SAVE_PATH)
