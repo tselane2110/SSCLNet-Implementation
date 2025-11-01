@@ -22,8 +22,8 @@ TRAIN_DATA_PATH = '/content/Preprocessed-splitted-data/train/5-class'
 # PRETRAIN_DATA_PATH = '/content/data/pretrain/'
 # TRAIN_DATA_PATH = '/content/data/train/'
 # VAL_DATA_PATH = '/content/data/val/' # since the paper implementation does not use any validation set
-CONTRASTIVE_SAVE_PATH = '/content/contrastive_training/models/contrastive_pretrained.pth'
-SUPERVISED_SAVE_PATH = '/content/supervised_training/models/supervised_final.pth'
+CONTRASTIVE_SAVE_PATH = '/content/training_output/contrastive_training/models/contrastive_pretrained.pth'
+SUPERVISED_SAVE_PATH = '/content/training_output/supervised_training/models/supervised_final.pth'
 
 # Random seed for reproducibility
 SEED = 42
