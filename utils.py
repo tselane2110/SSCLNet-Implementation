@@ -70,6 +70,8 @@ def setup_directories():
 
 def save_checkpoint(model, optimizer, epoch, loss, metrics, filename):
     """Save comprehensive training checkpoint"""
+    # CREATE DIRECTORY IF IT DOESN'T EXIST
+    os.makedirs(os.path.dirname(filename) if os.path.dirname(filename) else '.', exist_ok=True)
     checkpoint = {
         'epoch': epoch,
         'model_state_dict': model.state_dict(),
