@@ -6,6 +6,7 @@ RESNET_TYPE = 50
 NUM_CLASSES = 5
 BATCH_SIZE = 64  # Smaller for Colab CPU
 NUM_WORKERS = 4 # Number of parallel data loading workers
+EXPERIMENT_NAME = f"brain_mri_{NUM_CLASSES}class"
 
 # Contrastive training
 CONTRASTIVE_EPOCHS = 100
@@ -23,7 +24,7 @@ TRAIN_DATA_PATH = '/content/Preprocessed-splitted-data/train/5-class'
 # TRAIN_DATA_PATH = '/content/data/train/'
 # VAL_DATA_PATH = '/content/data/val/' # since the paper implementation does not use any validation set
 CONTRASTIVE_SAVE_PATH = '/content/training_output/contrastive_training/models/contrastive_pretrained.pth'
-SUPERVISED_SAVE_PATH = '/content/training_output/supervised_training/models/supervised_final.pth'
+SUPERVISED_SAVE_PATH = f'/content/training_output/supervised_training/models/{EXPERIMENT_NAME}/supervised_final.pth'
 
 # Random seed for reproducibility
 SEED = 42
