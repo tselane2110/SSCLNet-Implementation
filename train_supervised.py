@@ -31,10 +31,10 @@ def train_supervised():
 
         if 'model_state_dict' in checkpoint:
             print("✓ It's a checkpoint - loading model_state_dict")
-            model.load_state_dict(checkpoint['model_state_dict'])
+            model.load_state_dict(checkpoint['model_state_dict'], strict=False)
         else:
             print("✓ It's a model file - loading directly")
-            model.load_state_dict(checkpoint)
+            model.load_state_dict(checkpoint, strict=False)
         # model.load_state_dict(torch.load(config.CONTRASTIVE_SAVE_PATH))
         logger.logger.info("✓ Loaded pre-trained weights from contrastive training!")
     else:
