@@ -25,7 +25,17 @@ def train_supervised():
     
     # Load pre-trained weights from contrastive training
     if os.path.exists(config.CONTRASTIVE_SAVE_PATH):
-        model.load_state_dict(torch.load(config.CONTRASTIVE_SAVE_PATH))
+        # Check what's in the file (making sure that we loading the model and not the checkpoint)
+        checkpoint = torch.load(config.CONTRASTIVE_SAVE_PATH)
+        print("Keys in file:", checkpoint.keys())
+
+        if 'model_state_dict' in checkpoint:
+            print("✓ It's a checkpoint - loading model_state_dict")
+            model.load_state_dict(checkpoint['model_state_dict'])
+        else:
+            print("✓ It's a model file - loading directly")
+            model.load_state_dict(checkpoint)
+        # model.load_state_dict(torch.load(config.CONTRASTIVE_SAVE_PATH))
         logger.logger.info("✓ Loaded pre-trained weights from contrastive training!")
     else:
         logger.logger.warning("No pre-trained weights found. Training from scratch.")
