@@ -167,9 +167,11 @@ def plot_training_history(metrics_history, filename='training_history.png'):
     # Plot accuracies
     if 'train_acc' in metrics_history:
         axes[0,1].plot(metrics_history['train_acc'], label='Train Acc', color='green')
-    if 'val_acc' in metrics_history:
-        axes[0,1].plot(metrics_history['val_acc'], label='Val Acc', color='orange')
-    axes[0,1].set_title('Training & Validation Accuracy')
+        # commented out validation part since it doesn't exist in the base-paper
+    # if 'val_acc' in metrics_history:
+    #     axes[0,1].plot(metrics_history['val_acc'], label='Val Acc', color='orange')
+    # axes[0,1].set_title('Training & Validation Accuracy')
+    axes[0,1].set_title('Training Accuracy')
     axes[0,1].legend()
     axes[0,1].grid(True, alpha=0.3)
     
