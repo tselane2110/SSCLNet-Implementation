@@ -27,7 +27,7 @@ def train_supervised():
     if os.path.exists(config.CONTRASTIVE_SAVE_PATH):
         # Check what's in the file (making sure that we loading the model and not the checkpoint)
         checkpoint = torch.load(config.CONTRASTIVE_SAVE_PATH)
-        print("Keys in file:", checkpoint.keys())
+        # print("Keys in file:", checkpoint.keys())
 
         if 'model_state_dict' in checkpoint:
             print("✓ It's a checkpoint - loading model_state_dict")
