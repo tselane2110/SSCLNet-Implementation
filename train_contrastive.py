@@ -96,6 +96,7 @@ def train_contrastive():
             logger.logger.info(f"Checkpoint saved: {checkpoint_path}")
     
     # Save final model
+    os.makedirs(os.path.dirname(config.CONTRASTIVE_SAVE_PATH), exist_ok=True)
     torch.save(model.state_dict(), config.CONTRASTIVE_SAVE_PATH)
     logger.logger.info(f"Contrastive pre-training completed! Model saved to {config.CONTRASTIVE_SAVE_PATH}")
     
