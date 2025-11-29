@@ -6,7 +6,7 @@ Access the paper from [here](https://doi.org/10.1109/ACCESS.2023.3237542).
 Following are the steps involved in the implementation of this paper:
 1.  Dataset Preparation
 2.  Dataset Preprocessing
-3.  Implementing of the paper (available in the `implementation.ipynb` file)
+3.  Training the model (available in the `implementation.ipynb` file)
 4.  Results we got
 5.  Comparison and conclusion
 
