@@ -24,6 +24,7 @@ class ProjectionHead(nn.Module):
 
 class ClassificationHead(nn.Module):
     """ψ(·) - The classifier for tumor classification"""
+    # should update the input-dim when not using resnet-50
     def __init__(self, input_dim=2048, num_classes=4):
         super(ClassificationHead, self).__init__()
         self.classifier = nn.Sequential(
