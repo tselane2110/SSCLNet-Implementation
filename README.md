@@ -89,6 +89,8 @@ A[Image i] --"trained-σ(.)-SSCLNet"--> B("Label-feature-Li")
 * **ROC Curve**<br>
 <img width="500" height="500" alt="roc_curve" src="https://github.com/user-attachments/assets/3d36a4fc-fe62-4bf6-8687-bf7755956835" /><br>
 
+**Note:** `train_supervised.py` needs some revision. faces issues with model loading. Will fix after exams.
+
 
 
 
