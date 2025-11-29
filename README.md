@@ -21,13 +21,13 @@ Following are the steps involved in the implementation of this paper:
 
 ### 1. Data Preparation
 1. Deleted the `labels` folder from the `MRI 4 Class Dataset with bounding boxes` as it was not needed for our paper implementation.
-2. Merged the two `4 Class Datasets` and added a fifth class of `Glioblastoma Multiforme` tumor, making the resultant dataset to be a `5-class` dataset.
-3. Deduplicated the complete dataset (including 2-class data and 5-class data) using MD5 Hashing. Work is shown in the `dataset-preparation.ipynb` file.
+2. Merged the two `4 Class Datasets` and moved the `Glioblastoma Multiforme` tumor images to the `glioma` tumor folder, since glioblastoma is a sub-class of glioma.
+3. Deduplicated the complete dataset (including 2-class data and 4-class data) using MD5 Hashing. Work is shown in the `dataset-preparation.ipynb` file.
 
 The following two steps were performed using the `dataset.py` module.
 
 ### Data Splitting Strategy
-* **Pretrain**: 70% of the complete dataset was randomly sampled from both 2-class and 5-class folders, then placed in a flat directory structure without labels for self-supervised contrastive learning.
+* **Pretrain**: 70% of the complete dataset was randomly sampled from both 2-class and 4-class folders, then placed in a flat directory structure without labels for self-supervised contrastive learning.
 * **Train**: 20% of the complete dataset was randomly selected from the remaining 30% unseen data, maintaining the original hierarchical folder structure with proper class labels for supervised fine-tuning.
 * **Test**: 10% of the complete dataset was taken from the final portion of unseen data, preserving the folder hierarchy with accurate tumor type classifications for final model evaluation.
 
