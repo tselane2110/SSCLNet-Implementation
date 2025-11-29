@@ -18,9 +18,10 @@ SUPERVISED_EPOCHS = 100
 SUPERVISED_LR = 0.0001
 
 # Paths (adjust according to your directory structure)
-PRETRAIN_DATA_PATH = '/content/Preprocessed-splitted-data/'
-TRAIN_DATA_PATH = '/content/Preprocessed-splitted-data/train/5-class'
-TEST_DATA_PATH = '/content/Preprocessed-splitted-data/test/5-class'
+PRETRAIN_DATA_PATH = '/content/preprocessed-splitted-data/'
+# train and test paths will be different for 4-class and 2-class datasets
+TRAIN_DATA_PATH = '/content/preprocessed-splitted-data/train/4-class'
+TEST_DATA_PATH = '/content/preprocessed-splitted-data/test/4-class'
 # PRETRAIN_DATA_PATH = '/content/data/pretrain/'
 # TRAIN_DATA_PATH = '/content/data/train/'
 # VAL_DATA_PATH = '/content/data/val/' # since the paper implementation does not use any validation set
