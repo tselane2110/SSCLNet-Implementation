@@ -12,10 +12,9 @@ class FolderDeduplicator:
     def find_all_images(self):
         """PROPERLY count all image files"""
         print("Scanning for all images...")
-        
         # UPDATED: Correct folder names
         class2_folder = os.path.join(self.main_folder, '2-class')  # was 'j'
-        class5_folder = os.path.join(self.main_folder, '5-class')  # was 'k'
+        class4_folder = os.path.join(self.main_folder, '4-class')  # was 'k'
         
         image_count = 0
         
@@ -26,10 +25,10 @@ class FolderDeduplicator:
                 if os.path.isdir(subfolder_path):
                     image_count += self._count_images_in_folder(subfolder_path)
         
-        # Scan 5-class subfolders  
-        if os.path.exists(class5_folder):
-            for subfolder in os.listdir(class5_folder):
-                subfolder_path = os.path.join(class5_folder, subfolder)
+        # Scan 4-class subfolders  
+        if os.path.exists(class4_folder):
+            for subfolder in os.listdir(class4_folder):
+                subfolder_path = os.path.join(class4_folder, subfolder)
                 if os.path.isdir(subfolder_path):
                     image_count += self._count_images_in_folder(subfolder_path)
         
@@ -54,7 +53,7 @@ class FolderDeduplicator:
         
         # UPDATED: Correct folder names
         class2_folder = os.path.join(self.main_folder, '2-class')  # was 'j'
-        class5_folder = os.path.join(self.main_folder, '5-class')  # was 'k'
+        class4_folder = os.path.join(self.main_folder, '4-class')  # was 'k'
         
         hashes = defaultdict(list)
         
@@ -65,10 +64,10 @@ class FolderDeduplicator:
                 if os.path.isdir(subfolder_path):
                     self._hash_images_in_folder(subfolder_path, hashes)
         
-        # Scan 5-class subfolders
-        if os.path.exists(class5_folder):
-            for subfolder in os.listdir(class5_folder):
-                subfolder_path = os.path.join(class5_folder, subfolder)
+        # Scan 4-class subfolders
+        if os.path.exists(class4_folder):
+            for subfolder in os.listdir(class4_folder):
+                subfolder_path = os.path.join(class4_folder, subfolder)
                 if os.path.isdir(subfolder_path):
                     self._hash_images_in_folder(subfolder_path, hashes)
         
@@ -124,7 +123,7 @@ class FolderDeduplicator:
     def run_deduplication(self, backup=True):
         """Run complete deduplication process"""
         print(f"Starting deduplication in: {self.main_folder}")
-        print("Folder structure: i/{2-class,5-class}/*/[images]")  # UPDATED
+        print("Folder structure: i/{2-class,4-class}/*/[images]")  # UPDATED
         
         total_images = self.find_all_images()
         duplicates = self.find_duplicates()
@@ -153,10 +152,10 @@ def debug_folder_structure(main_folder):
     
     if os.path.exists(main_folder):
         class2_folder = os.path.join(main_folder, '2-class')  # UPDATED
-        class5_folder = os.path.join(main_folder, '5-class')  # UPDATED
+        class4_folder = os.path.join(main_folder, '4-class')  # UPDATED
         
         print(f"2-class folder exists: {os.path.exists(class2_folder)}")
-        print(f"5-class folder exists: {os.path.exists(class5_folder)}")
+        print(f"4-class folder exists: {os.path.exists(class4_folder)}")
         
         if os.path.exists(class2_folder):
             class2_subfolders = [f for f in os.listdir(class2_folder) if os.path.isdir(os.path.join(class2_folder, f))]
@@ -167,11 +166,11 @@ def debug_folder_structure(main_folder):
                 image_files = [f for f in files if f.lower().endswith(('.png', '.jpg', '.jpeg'))]
                 print(f"  {sub}: {len(image_files)} images")
         
-        if os.path.exists(class5_folder):
-            class5_subfolders = [f for f in os.listdir(class5_folder) if os.path.isdir(os.path.join(class5_folder, f))]
-            print(f"5-class subfolders: {class5_subfolders}")
-            for sub in class5_subfolders:
-                sub_path = os.path.join(class5_folder, sub)
+        if os.path.exists(class4_folder):
+            class4_subfolders = [f for f in os.listdir(class4_folder) if os.path.isdir(os.path.join(class4_folder, f))]
+            print(f"4-class subfolders: {class4_subfolders}")
+            for sub in class4_subfolders:
+                sub_path = os.path.join(class4_folder, sub)
                 files = os.listdir(sub_path)
                 image_files = [f for f in files if f.lower().endswith(('.png', '.jpg', '.jpeg'))]
                 print(f"  {sub}: {len(image_files)} images")
