@@ -68,15 +68,26 @@ A[Image i] --"trained-σ(.)-SSCLNet"--> B("Label-feature-Li")
 
 ### 4. Results we got
 * **Contrastive Pre-training Loss** <br>
-<img width="500" height="500" alt="contrastive_loss (1)" src="https://github.com/user-attachments/assets/1497ec8d-58b5-4d5e-8924-e56d84dc65f0" /><br>
+<img width="500" height="500" alt="contrastive_loss" src="https://github.com/user-attachments/assets/b178b741-736c-4b4a-9483-f178eedfb473" /><br>
+#### 4-Class Output:
 * **Class Distribution For Supervised Learning**<br>
-<img width="500" height="500" alt="class_distribution" src="https://github.com/user-attachments/assets/e8b8585f-44e8-4d92-8b1c-6161dde56d4d" /><br>
+<img width="500" height="500" alt="class_distribution" src="https://github.com/user-attachments/assets/bfa7c0ae-3035-4b6e-9f0d-1d2e4102e0d7" /><br>
 * **Supervised Training Loss and Accuracy**<br>
-<img width="4470" height="1523" alt="supervised_training_history_cv" src="https://github.com/user-attachments/assets/826bc122-b97a-453b-a14c-a8c0240f0994" /><br>
+<img width="4470" height="1514" alt="supervised_training_history" src="https://github.com/user-attachments/assets/c9c5e766-2625-4165-b3b6-073f322bc628" /><br>
 * **Confusion Matrix**<br>
-<img width="500" height="500" alt="confusion_matrix" src="https://github.com/user-attachments/assets/c06988b7-fa29-4b9e-9d6a-ef87375f71b7" /><br>
+<img width="500" height="500" alt="confusion_matrix" src="https://github.com/user-attachments/assets/31bd30fe-d1dc-4fce-9a28-de54821c9758" /><br>
 * **Multi-Class ROC Curve**<br>
-<img width="500" height="500" alt="roc_curve" src="https://github.com/user-attachments/assets/90d761d9-248f-4a97-b420-ad7c54666218" /><br>
+<img width="500" height="500" alt="roc_curve" src="https://github.com/user-attachments/assets/4abd2f7d-16b7-4b0a-b2b6-26458da58188" /><br>
+
+#### 2-Class Output:
+* **Class Distribution For Supervised Learning**<br>
+<img width="500" height="500" alt="class_distribution" src="https://github.com/user-attachments/assets/f87da656-e5a1-4298-9843-6304666dc7ba" /><br>
+* **Supervised Training Loss and Accuracy**<br>
+<img width="4470" height="1514" alt="supervised_training_history" src="https://github.com/user-attachments/assets/416f163f-071b-4003-b850-621ba962a27a" /><br>
+* **Confusion Matrix**<br>
+<img width="500" height="500" alt="confusion_matrix" src="https://github.com/user-attachments/assets/a24b322b-5fe6-490c-8cde-e731738c972c" /><br>
+* **ROC Curve**<br>
+<img width="500" height="500" alt="roc_curve" src="https://github.com/user-attachments/assets/3d36a4fc-fe62-4bf6-8687-bf7755956835" /><br>
 
 
 
