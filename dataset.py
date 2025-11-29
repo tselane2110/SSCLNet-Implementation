@@ -13,13 +13,13 @@ from torch.utils.data import DataLoader, Dataset
 from torchvision import transforms, datasets
 from PIL import Image
 
-# drive url: https://drive.google.com/file/d/1QI9_a1qjLyKOsj8IOFdRAZVOGs3W51jL/view?usp=drive_link
+# drive url: https://drive.google.com/file/d/1Ke4oXJiZiUnomAwUfjjlmxzeI6HK1Zz4/view?usp=drive_link
 
 """
 1. load data
-2. split_data (into train, validation and test)
-3. preprocess_data (for train and validation)
-4. get_dataloaders (for train and validation)
+2. split_data_disjoint_pretrain (into pretrain, train and test)
+3. preprocess_split_data (for training set)
+4. get_dataloaders (for training set)
 """
 
 def load_data(drive_url, extract_to="/content/"):
@@ -68,15 +68,15 @@ def split_data_disjoint_pretrain(input_dir, output_dir):
         
         # Create directories
         directories = [
-            'pretrain',  # Just one folder for 70% of ALL data
+            'pretrain',  # Just one folder for 70% of ALL data 
             'train/2-class/yes', 'train/2-class/no',
-            'train/5-class/Glioblastoma', 'train/5-class/glioma_tumor',
-            'train/5-class/meningioma_tumor', 'train/5-class/no_tumor', 
-            'train/5-class/pituitary_tumor',
+            'train/4-class/glioma_tumor',
+            'train/4-class/meningioma_tumor', 'train/4-class/no_tumor', 
+            'train/4-class/pituitary_tumor',
             'test/2-class/yes', 'test/2-class/no',
-            'test/5-class/Glioblastoma', 'test/5-class/glioma_tumor',
-            'test/5-class/meningioma_tumor', 'test/5-class/no_tumor',
-            'test/5-class/pituitary_tumor'
+            'test/4-class/glioma_tumor',
+            'test/4-class/meningioma_tumor', 'test/4-class/no_tumor',
+            'test/4-class/pituitary_tumor'
         ]
         
         for directory in directories:
@@ -85,7 +85,7 @@ def split_data_disjoint_pretrain(input_dir, output_dir):
             print(f"Created: {full_path}")
     
     def collect_all_images():
-        """Collect ALL images from both 2-class and 5-class with their paths and labels"""
+        """Collect ALL images from both 2-class and 4-class with their paths and labels"""
         all_images = []  # (file_path, original_folder, class_name)
         
         # Collect from 2-class
@@ -97,15 +97,15 @@ def split_data_disjoint_pretrain(input_dir, output_dir):
                         file_path = os.path.join(input_class_dir, file)
                         all_images.append((file_path, '2-class', class_folder))
         
-        # Collect from 5-class
-        five_class_folders = ['Glioblastoma', 'glioma_tumor', 'meningioma_tumor', 'no_tumor', 'pituitary_tumor']
-        for class_folder in five_class_folders:
-            input_class_dir = os.path.join(input_dir, '5-class', class_folder)
+        # Collect from 4-class
+        four_class_folders = ['glioma_tumor', 'meningioma_tumor', 'no_tumor', 'pituitary_tumor']
+        for class_folder in four_class_folders:
+            input_class_dir = os.path.join(input_dir, '4-class', class_folder)
             if os.path.exists(input_class_dir):
                 for file in os.listdir(input_class_dir):
                     if file.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp', '.tiff')):
                         file_path = os.path.join(input_class_dir, file)
-                        all_images.append((file_path, '5-class', class_folder))
+                        all_images.append((file_path, '4-class', class_folder))
         
         return all_images
     
@@ -178,8 +178,7 @@ def split_data_disjoint_pretrain(input_dir, output_dir):
     print("│   ├── 2-class/       # 20% of original 2-class data")
     print("│   │   ├── yes/")
     print("│   │   └── no/")
-    print("│   └── 5-class/       # 20% of original 5-class data")
-    print("│       ├── Glioblastoma/")
+    print("│   └── 4-class/       # 20% of original 4-class data")
     print("│       ├── glioma_tumor/")
     print("│       ├── meningioma_tumor/")
     print("│       ├── no_tumor/")
@@ -188,8 +187,7 @@ def split_data_disjoint_pretrain(input_dir, output_dir):
     print("    ├── 2-class/       # 10% of original 2-class data")
     print("    │   ├── yes/")
     print("    │   └── no/")
-    print("    └── 5-class/       # 10% of original 5-class data")
-    print("        ├── Glioblastoma/")
+    print("    └── 4-class/       # 10% of original 4-class data")
     print("        ├── glioma_tumor/")
     print("        ├── meningioma_tumor/")
     print("        ├── no_tumor/")
@@ -330,7 +328,7 @@ def preprocess_split_data(input_path, output_path):
     print("\nProcessing train folder...")
     train_categories = {
         '2-class': ['yes', 'no'],
-        '5-class': ['Glioblastoma', 'glioma_tumor', 'meningioma_tumor', 'no_tumor', 'pituitary_tumor']
+        '4-class': ['glioma_tumor', 'meningioma_tumor', 'no_tumor', 'pituitary_tumor']
     }
     
     for main_folder, class_folders in train_categories.items():
@@ -360,8 +358,7 @@ def preprocess_split_data(input_path, output_path):
     print("│   ├── 2-class/       # 20% of 2-class data (preprocessed)")
     print("│   │   ├── yes/")
     print("│   │   └── no/")
-    print("│   └── 5-class/       # 20% of 5-class data (preprocessed)")
-    print("│       ├── Glioblastoma/")
+    print("│   └── 4-class/       # 20% of 4-class data (preprocessed)")
     print("│       ├── glioma_tumor/")
     print("│       ├── meningioma_tumor/")
     print("│       ├── no_tumor/")
@@ -370,8 +367,7 @@ def preprocess_split_data(input_path, output_path):
     print("    ├── 2-class/       # 10% of 2-class data (preprocessed)")
     print("    │   ├── yes/")
     print("    │   └── no/")
-    print("    └── 5-class/       # 10% of 5-class data (preprocessed)")
-    print("        ├── Glioblastoma/")
+    print("    └── 4-class/       # 10% of 4-class data (preprocessed)")
     print("        ├── glioma_tumor/")
     print("        ├── meningioma_tumor/")
     print("        ├── no_tumor/")
