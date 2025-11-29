@@ -160,7 +160,7 @@ def plot_training_history(metrics_history, filename='training_history.png'):
         axes[0,0].plot(metrics_history['train_loss'], label='Train Loss', color='blue')
     if 'val_loss' in metrics_history:
         axes[0,0].plot(metrics_history['val_loss'], label='Val Loss', color='red')
-    axes[0,0].set_title('Training & Validation Loss')
+    axes[0,0].set_title('Training Loss') # change to "Train and Validation Loss" if u have validation loss
     axes[0,0].legend()
     axes[0,0].grid(True, alpha=0.3)
     
